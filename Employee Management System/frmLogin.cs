@@ -17,9 +17,44 @@ namespace Employee_Management_System
         public frmLogin()
         {
             InitializeComponent();
+            EnsureAdminExists();
         }
 
-        
+        private void EnsureAdminExists()
+        {
+            using (SqlConnection conn = new SqlConnection(@"Server=MSI\SQLEXPRESS;Database=Users;Integrated Security=True;Encrypt=False;"))
+            {
+                conn.Open();
+
+                // Check if there is an admin
+                string checkQuery = "SELECT COUNT(*) FROM Users WHERE Role = 'Admin'";
+                SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
+                int adminCount = (int)checkCmd.ExecuteScalar();
+
+                if (adminCount == 0)
+                {
+                    // If there is no admin, add a default admin
+                    string adminUsername = "admin";
+                    string adminPassword = "1234"; // Default password
+                    byte[] passwordHash;
+
+                    // Hash the password with SHA-256
+                    using (SHA256 sha256 = SHA256.Create())
+                    {
+                        passwordHash = sha256.ComputeHash(Encoding.UTF8.GetBytes(adminPassword));
+                    }
+
+                    string insertQuery = "INSERT INTO Users (Username, PasswordHash, Role) VALUES (@username, @passwordHash, @role)";
+                    SqlCommand insertCmd = new SqlCommand(insertQuery, conn);
+                    insertCmd.Parameters.AddWithValue("@username", adminUsername);
+                    insertCmd.Parameters.AddWithValue("@passwordHash", passwordHash);
+                    insertCmd.Parameters.AddWithValue("@role", "Admin");
+
+                    insertCmd.ExecuteNonQuery();
+                    MessageBox.Show("Default admin user created! Username: admin, Password: 1234");
+                }
+            }
+        }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
@@ -80,6 +115,6 @@ namespace Employee_Management_System
             }
         }
 
-        
+
     }
 }

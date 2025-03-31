@@ -13,7 +13,7 @@ namespace Employee_Management_System
     public partial class frmMain : Form
     {
         private string currentUser;
-        private string currentRole;
+        public static string currentRole;
         public frmMain(string username, string role)
         {
             InitializeComponent();

@@ -21,7 +21,7 @@ namespace Employee_Management_System
         public frmRegister()
         {
             InitializeComponent();
-            
+
         }
 
 
@@ -51,23 +51,25 @@ namespace Employee_Management_System
                 {
                     conn.Open();
 
-                    // Şifreyi hash'leyelim
+                    // Let's hash the password
                     byte[] passwordHash = HashPassword(password);
 
-                    // SQL INSERT sorgusu
+                    // SQL INSERT query
                     string query = "INSERT INTO Users (Username, PasswordHash, Role) VALUES (@Username, @PasswordHash, 'User')";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@Username", username);
-                        cmd.Parameters.AddWithValue("@PasswordHash", passwordHash);  // Base64 yerine doğrudan byte array kaydediyoruz
+                        cmd.Parameters.AddWithValue("@PasswordHash", passwordHash);  // We save byte array directly instead of Base64
 
                         int rowsAffected = cmd.ExecuteNonQuery();
 
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Registration successful!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Close(); // Kayıt başarılı olunca formu kapat
+                            this.Close(); // Close the form when registration is successful
+                            frmLogin login = new frmLogin();
+                            login.Show();
                         }
                         else
                         {
@@ -99,10 +101,10 @@ namespace Employee_Management_System
             this.Hide();
             frmLogin login = new frmLogin();
             login.Show();
-            
+
         }
 
-       
+
     }
 
 

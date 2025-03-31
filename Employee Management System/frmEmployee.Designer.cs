@@ -38,6 +38,10 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.dtvEmployees = new System.Windows.Forms.DataGridView();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnExportCSV = new System.Windows.Forms.Button();
+            this.btnExportExcel = new System.Windows.Forms.Button();
+            this.btnAttendance = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtvEmployees)).BeginInit();
             this.SuspendLayout();
             // 
@@ -141,12 +145,55 @@
             this.dtvEmployees.Size = new System.Drawing.Size(600, 200);
             this.dtvEmployees.TabIndex = 9;
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(428, 52);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(181, 22);
+            this.txtSearch.TabIndex = 10;
+            this.txtSearch.Text = "Search by name or position";
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // btnExportCSV
+            // 
+            this.btnExportCSV.Location = new System.Drawing.Point(388, 112);
+            this.btnExportCSV.Name = "btnExportCSV";
+            this.btnExportCSV.Size = new System.Drawing.Size(93, 23);
+            this.btnExportCSV.TabIndex = 11;
+            this.btnExportCSV.Text = "Export CSV";
+            this.btnExportCSV.UseVisualStyleBackColor = true;
+            this.btnExportCSV.Click += new System.EventHandler(this.btnExportCSV_Click);
+            // 
+            // btnExportExcel
+            // 
+            this.btnExportExcel.Location = new System.Drawing.Point(499, 112);
+            this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.Size = new System.Drawing.Size(131, 23);
+            this.btnExportExcel.TabIndex = 12;
+            this.btnExportExcel.Text = "Export Excel";
+            this.btnExportExcel.UseVisualStyleBackColor = true;
+            this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
+            // 
+            // btnAttendance
+            // 
+            this.btnAttendance.Location = new System.Drawing.Point(533, 164);
+            this.btnAttendance.Name = "btnAttendance";
+            this.btnAttendance.Size = new System.Drawing.Size(137, 54);
+            this.btnAttendance.TabIndex = 13;
+            this.btnAttendance.Text = "Mark Attendance Page";
+            this.btnAttendance.UseVisualStyleBackColor = true;
+            this.btnAttendance.Click += new System.EventHandler(this.btnAttendance_Click);
+            // 
             // frmEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(682, 453);
+            this.Controls.Add(this.btnAttendance);
+            this.Controls.Add(this.btnExportExcel);
+            this.Controls.Add(this.btnExportCSV);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.dtvEmployees);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
@@ -178,5 +225,9 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridView dtvEmployees;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnExportCSV;
+        private System.Windows.Forms.Button btnExportExcel;
+        private System.Windows.Forms.Button btnAttendance;
     }
 }
